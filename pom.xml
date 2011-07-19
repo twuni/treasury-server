@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.twuni.money</groupId>
+	<artifactId>treasury-simple</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>Treasury (simple)</name>
+	<description>This Treasury implementation uses the Twuni Common library exclusively.</description>
+
+	<scm>
+		<developerConnection>scm:git:ssh:git@github.com:twuni/treasury.git</developerConnection>
+		<connection>scm:git:ssh:git@github.com:twuni/treasury.git</connection>
+		<url>scm:git:https://twuni@github.com/twuni/treasury.git</url>
+	</scm>
+
+	<developers>
+		<developer>
+			<id>twuni</id>
+			<name>Leo Accend</name>
+			<organization>Twuni</organization>
+			<organizationUrl>https://twuni.org/</organizationUrl>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<build>
+
+		<pluginManagement>
+
+			<plugins>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<encoding>UTF-8</encoding>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<configuration>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+
+			</plugins>
+
+		</pluginManagement>
+
+	</build>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.8.5</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.twuni</groupId>
+			<artifactId>common-net-http</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.twuni</groupId>
+			<artifactId>common-crypto</artifactId>
+			<version>0.1.2-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.twuni</groupId>
+			<artifactId>common-orm-jdbc</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.twuni.money</groupId>
+			<artifactId>common</artifactId>
+			<version>0.2.3-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.1</version>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+
+	</dependencies>
+
+</project>
