@@ -5,22 +5,24 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.twuni.common.Adapter;
-import org.twuni.common.orm.Transaction;
+import org.twuni.common.Factory;
 import org.twuni.common.orm.Session;
+import org.twuni.common.orm.Transaction;
 import org.twuni.money.common.Token;
 import org.twuni.money.common.Treasury;
-import org.twuni.money.common.TreasuryService;
 import org.twuni.money.treasury.Message;
 import org.twuni.money.treasury.repository.TokenRepository;
 
 public class Split implements Transaction {
 
+	private final Factory<Treasury> treasuryFactory;
 	private final String message;
 	private final Adapter<Collection<Token>, String> adapter;
 	private String result;
 
-	public Split( String message, Adapter<Collection<Token>, String> adapter ) {
+	public Split( String message, Factory<Treasury> treasuryFactory, Adapter<Collection<Token>, String> adapter ) {
 		this.message = message;
+		this.treasuryFactory = treasuryFactory;
 		this.adapter = adapter;
 	}
 
@@ -30,7 +32,7 @@ public class Split implements Transaction {
 		try {
 
 			TokenRepository repository = new TokenRepository( session );
-			Treasury treasury = new TreasuryService( 2048, "home.twuni.org", repository );
+			Treasury treasury = treasuryFactory.createInstance( repository );
 			Message message = Message.parse( this.message, repository );
 			Set<Token> tokens = treasury.split( message.getToken(), Integer.parseInt( message.getContent() ) );
 
