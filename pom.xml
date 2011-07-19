@@ -4,17 +4,17 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.twuni.money</groupId>
-	<artifactId>treasury-simple</artifactId>
+	<artifactId>treasury-server</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Treasury (simple)</name>
-	<description>This Treasury implementation uses the Twuni Common library exclusively.</description>
+	<name>Treasury</name>
+	<description>This Treasury implementation runs as a standalone service.</description>
 
 	<scm>
-		<developerConnection>scm:git:ssh:git@github.com:twuni/treasury.git</developerConnection>
-		<connection>scm:git:ssh:git@github.com:twuni/treasury.git</connection>
-		<url>scm:git:https://twuni@github.com/twuni/treasury.git</url>
+		<developerConnection>scm:git:ssh:git@github.com:twuni/treasury-server.git</developerConnection>
+		<connection>scm:git:ssh:git@github.com:twuni/treasury-server.git</connection>
+		<url>scm:git:https://twuni@github.com/twuni/treasury-server.git</url>
 	</scm>
 
 	<developers>
