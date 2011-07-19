@@ -4,7 +4,7 @@ import org.twuni.common.net.http.Method;
 import org.twuni.common.net.http.Server;
 import org.twuni.common.net.http.responder.ExceptionHandler;
 import org.twuni.common.net.http.responder.RequestMapping;
-import org.twuni.common.orm.Behavior;
+import org.twuni.common.orm.Transaction;
 import org.twuni.common.orm.Session;
 import org.twuni.common.orm.jdbc.Connection;
 import org.twuni.money.treasury.repository.PrivateKeyRepository;
@@ -19,7 +19,7 @@ public class Standalone {
 
 		Connection connection = new Connection( "jdbc:hsqldb:mem:test", "SA", "" );
 
-		connection.run( new Behavior() {
+		connection.run( new Transaction() {
 
 			@Override
 			public void perform( Session session ) {

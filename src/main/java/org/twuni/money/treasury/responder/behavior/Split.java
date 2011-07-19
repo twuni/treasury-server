@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.twuni.common.Adapter;
-import org.twuni.common.orm.Behavior;
+import org.twuni.common.orm.Transaction;
 import org.twuni.common.orm.Session;
 import org.twuni.money.common.Token;
 import org.twuni.money.common.Treasury;
@@ -13,7 +13,7 @@ import org.twuni.money.common.TreasuryService;
 import org.twuni.money.treasury.Message;
 import org.twuni.money.treasury.repository.TokenRepository;
 
-public class Split implements Behavior {
+public class Split implements Transaction {
 
 	private final String message;
 	private final Adapter<Collection<Token>, String> adapter;

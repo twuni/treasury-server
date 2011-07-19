@@ -1,14 +1,14 @@
 package org.twuni.money.treasury.responder.behavior;
 
 import org.twuni.common.Adapter;
-import org.twuni.common.orm.Behavior;
+import org.twuni.common.orm.Transaction;
 import org.twuni.common.orm.Session;
 import org.twuni.money.common.Token;
 import org.twuni.money.common.Treasury;
 import org.twuni.money.common.TreasuryService;
 import org.twuni.money.treasury.repository.TokenRepository;
 
-public class Create implements Behavior {
+public class Create implements Transaction {
 
 	private final String content;
 	private final Adapter<Token, String> adapter;
