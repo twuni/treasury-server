@@ -10,12 +10,12 @@ import org.twuni.money.common.Token;
 import org.twuni.money.treasury.adapter.TokenAdapter;
 import org.twuni.money.treasury.responder.behavior.Merge;
 
-public class MergeResponder implements Responder {
+public class Merger implements Responder {
 
 	private final Adapter<Token, String> adapter = new TokenAdapter();
 	private final Connection connection;
 
-	public MergeResponder( Connection connection ) {
+	public Merger( Connection connection ) {
 		this.connection = connection;
 	}
 

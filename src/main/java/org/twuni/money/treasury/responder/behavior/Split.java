@@ -36,8 +36,6 @@ public class Split implements Behavior {
 
 			this.result = message.encrypt( adapter.adapt( tokens ) );
 
-		} catch( NumberFormatException exception ) {
-			throw new RuntimeException( exception );
 		} catch( IOException exception ) {
 			throw new RuntimeException( exception );
 		}

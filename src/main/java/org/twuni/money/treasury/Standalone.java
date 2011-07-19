@@ -9,9 +9,9 @@ import org.twuni.common.orm.Session;
 import org.twuni.common.orm.jdbc.Connection;
 import org.twuni.money.treasury.repository.PrivateKeyRepository;
 import org.twuni.money.treasury.repository.TokenRepository;
-import org.twuni.money.treasury.responder.CreateResponder;
-import org.twuni.money.treasury.responder.MergeResponder;
-import org.twuni.money.treasury.responder.SplitResponder;
+import org.twuni.money.treasury.responder.Creator;
+import org.twuni.money.treasury.responder.Merger;
+import org.twuni.money.treasury.responder.Splitter;
 
 public class Standalone {
 
@@ -31,9 +31,9 @@ public class Standalone {
 
 		RequestMapping mapping = new RequestMapping();
 
-		mapping.map( Method.POST, "/treasury/create", new CreateResponder( connection ) );
-		mapping.map( Method.POST, "/treasury/merge", new MergeResponder( connection ) );
-		mapping.map( Method.POST, "/treasury/split", new SplitResponder( connection ) );
+		mapping.map( Method.POST, "/treasury/create", new Creator( connection ) );
+		mapping.map( Method.POST, "/treasury/merge", new Merger( connection ) );
+		mapping.map( Method.POST, "/treasury/split", new Splitter( connection ) );
 
 		Server server = new Server( 8080, new ExceptionHandler( mapping ) );
 
