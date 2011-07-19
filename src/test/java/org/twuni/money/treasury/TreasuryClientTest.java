@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.twuni.money.common.Token;
 import org.twuni.money.common.Treasury;
@@ -12,6 +13,7 @@ import org.twuni.money.common.TreasuryClient;
 
 public class TreasuryClientTest {
 
+	@Ignore
 	@Test
 	public void doSomething() {
 
