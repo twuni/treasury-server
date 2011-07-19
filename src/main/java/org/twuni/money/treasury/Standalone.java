@@ -31,25 +31,17 @@ public class Standalone {
 	}
 
 	private static Factory<Treasury> createTreasuryFactory() {
-
 		return new TreasuryFactory( Configuration.getDomain(), Configuration.getTokenStrength() );
-
 	}
 
 	private static Connection createConnection() {
-
 		return createConnection( Configuration.getDatabaseUrl(), Configuration.getDatabaseUsername(), Configuration.getDatabasePassword(), Configuration.getDatabaseConnectionPoolSize() );
-
 	}
 
 	private static Connection createConnection( String url, String username, String password, int poolSize ) {
-
 		Connection connection = new Connection( url, username, password, poolSize );
-
 		createSchema( connection );
-
 		return connection;
-
 	}
 
 	private static void createSchema( Connection connection ) {
