@@ -98,6 +98,12 @@
 
 		<dependency>
 			<groupId>org.twuni</groupId>
+			<artifactId>common-crypto-rsa</artifactId>
+			<version>0.1.2-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.twuni</groupId>
 			<artifactId>common-net-http</artifactId>
 			<version>0.1.0-SNAPSHOT</version>
 		</dependency>
