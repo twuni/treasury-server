@@ -36,13 +36,13 @@ public class Merge implements Transaction {
 			Message a = Message.parse( message, repository );
 			Message b = Message.parse( a.getContent(), repository );
 
-			if( !b.getContent().equals( a.getToken().getActionKey().getPublicKey() ) ) {
+			if( !b.getContent().equals( a.getToken().getActionKey().getPublicKey().serialize() ) ) {
 				throw new IllegalArgumentException( "Nested message must match its parent's public key." );
 			}
 
 			Token merged = treasury.merge( a.getToken(), b.getToken() );
 
-			this.result = b.encrypt( a.encrypt( adapter.adapt( merged ) ) );
+			this.result = a.encrypt( b.encrypt( adapter.adapt( merged ) ) );
 
 		} catch( IOException exception ) {
 			throw new RuntimeException( exception );
