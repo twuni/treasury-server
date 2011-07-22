@@ -1,0 +1,9 @@
+server.port=8080
+server.domain=localhost
+
+token.strength=2048
+
+jdbc.url=jdbc:hsqldb:mem:test
+jdbc.username=SA
+jdbc.password=
+jdbc.pool_size=10
