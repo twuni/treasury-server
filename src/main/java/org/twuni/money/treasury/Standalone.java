@@ -1,5 +1,7 @@
 package org.twuni.money.treasury;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.twuni.common.Factory;
 import org.twuni.common.net.http.Method;
 import org.twuni.common.net.http.Server;
@@ -18,6 +20,8 @@ import org.twuni.money.treasury.responder.Merger;
 import org.twuni.money.treasury.responder.Splitter;
 
 public class Standalone {
+
+	private static final Logger log = LoggerFactory.getLogger( Standalone.class );
 
 	public static void main( String [] args ) {
 
@@ -47,15 +51,21 @@ public class Standalone {
 
 	private static void createSchema( Connection connection ) {
 
-		connection.run( new Transaction() {
+		try {
 
-			@Override
-			public void perform( Session session ) {
-				PrivateKeyRepository.create( session );
-				TokenRepository.create( session );
-			}
+			connection.run( new Transaction() {
 
-		} );
+				@Override
+				public void perform( Session session ) {
+					PrivateKeyRepository.create( session );
+					TokenRepository.create( session );
+				}
+
+			} );
+
+		} catch( RuntimeException exception ) {
+			log.warn( "Unable to create schema.", exception );
+		}
 
 	}
 
