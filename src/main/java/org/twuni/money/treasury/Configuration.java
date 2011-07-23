@@ -12,6 +12,24 @@ public class Configuration {
 		return config.getString( "server.domain" );
 	}
 
+	public static String getBaseUrl() {
+
+		StringBuilder url = new StringBuilder();
+
+		url.append( "http" );
+		url.append( "://" );
+		url.append( getDomain() );
+
+		int port = getPort();
+		if( port != 80 ) {
+			url.append( ":" );
+			url.append( port );
+		}
+
+		return url.toString();
+
+	}
+
 	public static int getTokenStrength() {
 		return config.getInt( "token.strength" );
 	}

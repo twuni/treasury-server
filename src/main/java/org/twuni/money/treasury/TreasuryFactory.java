@@ -8,18 +8,18 @@ import org.twuni.money.common.TreasuryService;
 
 public class TreasuryFactory implements Factory<Treasury> {
 
-	private final String domain;
+	private final String baseUrl;
 	private final int keyStrength;
 
-	public TreasuryFactory( String domain, int keyStrength ) {
-		this.domain = domain;
+	public TreasuryFactory( String baseUrl, int keyStrength ) {
+		this.baseUrl = baseUrl;
 		this.keyStrength = keyStrength;
 	}
 
 	@SuppressWarnings( "unchecked" )
 	@Override
 	public Treasury createInstance( Object... args ) {
-		return new TreasuryService( keyStrength, domain, (Repository<String, Token>) args[0] );
+		return new TreasuryService( keyStrength, baseUrl, (Repository<String, Token>) args[0] );
 	}
 
 }

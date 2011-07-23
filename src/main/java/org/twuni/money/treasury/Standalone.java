@@ -32,7 +32,7 @@ public class Standalone {
 	}
 
 	private static Factory<Treasury> createTreasuryFactory() {
-		return new TreasuryFactory( Configuration.getDomain(), Configuration.getTokenStrength() );
+		return new TreasuryFactory( Configuration.getBaseUrl(), Configuration.getTokenStrength() );
 	}
 
 	private static Connection createConnection() {
@@ -63,10 +63,10 @@ public class Standalone {
 
 		RequestMapping mapping = new RequestMapping();
 
-		mapping.map( Method.POST, "/treasury/create", new Creator( treasuryFactory, connection ) );
-		mapping.map( Method.POST, "/treasury/merge", new Merger( treasuryFactory, connection ) );
-		mapping.map( Method.POST, "/treasury/split", new Splitter( treasuryFactory, connection ) );
-		mapping.map( Method.POST, "/treasury/value", new Evaluator( treasuryFactory, connection ) );
+		mapping.map( Method.POST, "/create", new Creator( treasuryFactory, connection ) );
+		mapping.map( Method.POST, "/merge", new Merger( treasuryFactory, connection ) );
+		mapping.map( Method.POST, "/split", new Splitter( treasuryFactory, connection ) );
+		mapping.map( Method.POST, "/value", new Evaluator( treasuryFactory, connection ) );
 
 		return new ExceptionHandler( mapping );
 
