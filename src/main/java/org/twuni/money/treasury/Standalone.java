@@ -64,7 +64,7 @@ public class Standalone {
 			} );
 
 		} catch( RuntimeException exception ) {
-			log.warn( "Unable to create schema.", exception );
+			log.warn( String.format( "Unable to create schema: %s", exception.getMessage() ) );
 		}
 
 	}
