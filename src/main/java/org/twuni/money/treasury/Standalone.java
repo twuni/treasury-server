@@ -13,6 +13,7 @@ import org.twuni.money.common.Treasury;
 import org.twuni.money.treasury.repository.PrivateKeyRepository;
 import org.twuni.money.treasury.repository.TokenRepository;
 import org.twuni.money.treasury.responder.Creator;
+import org.twuni.money.treasury.responder.Evaluator;
 import org.twuni.money.treasury.responder.Merger;
 import org.twuni.money.treasury.responder.Splitter;
 
@@ -65,6 +66,7 @@ public class Standalone {
 		mapping.map( Method.POST, "/treasury/create", new Creator( treasuryFactory, connection ) );
 		mapping.map( Method.POST, "/treasury/merge", new Merger( treasuryFactory, connection ) );
 		mapping.map( Method.POST, "/treasury/split", new Splitter( treasuryFactory, connection ) );
+		mapping.map( Method.POST, "/treasury/value", new Evaluator( treasuryFactory, connection ) );
 
 		return new ExceptionHandler( mapping );
 
