@@ -5,7 +5,7 @@ import org.twuni.common.net.http.request.Request;
 import org.twuni.common.net.http.responder.Responder;
 import org.twuni.common.net.http.response.Response;
 import org.twuni.common.net.http.response.Status;
-import org.twuni.common.orm.Connection;
+import org.twuni.common.persistence.Connection;
 import org.twuni.money.common.Treasury;
 import org.twuni.money.treasury.responder.behavior.Evaluate;
 

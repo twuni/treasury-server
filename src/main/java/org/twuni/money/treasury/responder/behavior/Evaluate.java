@@ -3,8 +3,8 @@ package org.twuni.money.treasury.responder.behavior;
 import java.io.IOException;
 
 import org.twuni.common.Factory;
-import org.twuni.common.orm.Session;
-import org.twuni.common.orm.Transaction;
+import org.twuni.common.persistence.Session;
+import org.twuni.common.persistence.Transaction;
 import org.twuni.money.common.Treasury;
 import org.twuni.money.treasury.Message;
 import org.twuni.money.treasury.repository.TokenRepository;

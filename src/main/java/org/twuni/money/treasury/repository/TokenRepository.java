@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.twuni.common.Adapter;
 import org.twuni.common.crypto.rsa.PrivateKey;
-import org.twuni.common.orm.Parameterized;
-import org.twuni.common.orm.Parameters;
-import org.twuni.common.orm.Record;
-import org.twuni.common.orm.Session;
+import org.twuni.common.persistence.Parameterized;
+import org.twuni.common.persistence.Parameters;
+import org.twuni.common.persistence.Record;
+import org.twuni.common.persistence.Session;
 import org.twuni.money.common.Repository;
 import org.twuni.money.common.SimpleToken;
 import org.twuni.money.common.Token;

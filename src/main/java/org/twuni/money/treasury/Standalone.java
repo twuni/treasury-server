@@ -8,9 +8,9 @@ import org.twuni.common.net.http.Server;
 import org.twuni.common.net.http.responder.ExceptionHandler;
 import org.twuni.common.net.http.responder.RequestMapping;
 import org.twuni.common.net.http.responder.Responder;
-import org.twuni.common.orm.Session;
-import org.twuni.common.orm.Transaction;
-import org.twuni.common.orm.jdbc.Connection;
+import org.twuni.common.persistence.Connection;
+import org.twuni.common.persistence.Session;
+import org.twuni.common.persistence.Transaction;
 import org.twuni.money.common.Treasury;
 import org.twuni.money.treasury.repository.PrivateKeyRepository;
 import org.twuni.money.treasury.repository.TokenRepository;
@@ -44,7 +44,7 @@ public class Standalone {
 	}
 
 	private static Connection createConnection( String url, String username, String password, int poolSize ) {
-		Connection connection = new Connection( url, username, password, poolSize );
+		Connection connection = new org.twuni.common.persistence.jdbc.Connection( url, username, password, poolSize );
 		createSchema( connection );
 		return connection;
 	}
