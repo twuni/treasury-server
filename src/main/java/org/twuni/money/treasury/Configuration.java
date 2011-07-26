@@ -1,16 +1,10 @@
 package org.twuni.money.treasury;
 
+import org.twuni.common.config.PropertiesConfiguration;
+
 public class Configuration {
 
-	private static final org.twuni.common.Configuration config = new org.twuni.common.Configuration( "treasury" );
-
-	public static int getPort() {
-		return config.getInt( "server.port" );
-	}
-
-	public static String getDomain() {
-		return config.getString( "server.domain" );
-	}
+	private static final org.twuni.common.config.Configuration config = PropertiesConfiguration.load( "treasury" );
 
 	public static String getBaseUrl() {
 
@@ -28,6 +22,14 @@ public class Configuration {
 
 		return url.toString();
 
+	}
+
+	public static int getPort() {
+		return config.getInt( "server.port" );
+	}
+
+	public static String getDomain() {
+		return config.getString( "server.domain" );
 	}
 
 	public static int getTokenStrength() {
