@@ -1,4 +1,4 @@
-package org.twuni.money.treasury.responder.behavior;
+package org.twuni.money.treasury.responder.transaction;
 
 import org.twuni.common.Adapter;
 import org.twuni.common.Factory;
@@ -8,7 +8,7 @@ import org.twuni.money.common.Token;
 import org.twuni.money.common.Treasury;
 import org.twuni.money.treasury.repository.TokenRepository;
 
-public class Create implements Transaction {
+public class CreateTransaction implements Transaction {
 
 	private final Factory<Treasury> treasuryFactory;
 	private final String content;
@@ -16,7 +16,7 @@ public class Create implements Transaction {
 
 	private String result;
 
-	public Create( String content, Factory<Treasury> treasuryFactory, Adapter<Token, String> adapter ) {
+	public CreateTransaction( String content, Factory<Treasury> treasuryFactory, Adapter<Token, String> adapter ) {
 		this.content = content;
 		this.treasuryFactory = treasuryFactory;
 		this.adapter = adapter;

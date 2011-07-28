@@ -1,4 +1,4 @@
-package org.twuni.money.treasury.responder.behavior;
+package org.twuni.money.treasury.responder.transaction;
 
 import java.io.IOException;
 
@@ -9,14 +9,14 @@ import org.twuni.money.common.Treasury;
 import org.twuni.money.treasury.Message;
 import org.twuni.money.treasury.repository.TokenRepository;
 
-public class Evaluate implements Transaction {
+public class EvaluateTransaction implements Transaction {
 
 	private final Factory<Treasury> treasuryFactory;
 	private final String content;
 
 	private String result;
 
-	public Evaluate( String content, Factory<Treasury> treasuryFactory ) {
+	public EvaluateTransaction( String content, Factory<Treasury> treasuryFactory ) {
 		this.content = content;
 		this.treasuryFactory = treasuryFactory;
 	}

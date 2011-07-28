@@ -14,42 +14,52 @@ import org.twuni.common.persistence.Transaction;
 import org.twuni.money.common.Treasury;
 import org.twuni.money.treasury.repository.PrivateKeyRepository;
 import org.twuni.money.treasury.repository.TokenRepository;
-import org.twuni.money.treasury.responder.Creator;
-import org.twuni.money.treasury.responder.Evaluator;
-import org.twuni.money.treasury.responder.Merger;
-import org.twuni.money.treasury.responder.Splitter;
+import org.twuni.money.treasury.responder.AboutResponder;
+import org.twuni.money.treasury.responder.AssetResponder;
+import org.twuni.money.treasury.responder.CreateResponder;
+import org.twuni.money.treasury.responder.EvaluateResponder;
+import org.twuni.money.treasury.responder.MergeResponder;
+import org.twuni.money.treasury.responder.SplitResponder;
 
 public class Standalone {
 
 	private static final Logger log = LoggerFactory.getLogger( Standalone.class );
 
+	private final Server server;
+
 	public static void main( String [] args ) {
+		new Standalone().start();
+	}
+
+	public Standalone() {
 
 		Connection connection = createConnection();
 		Factory<Treasury> treasuryFactory = createTreasuryFactory();
 		Responder responder = createResponder( treasuryFactory, connection );
 
-		Server server = new Server( Configuration.getPort(), responder );
-
-		server.start();
+		this.server = new Server( Configuration.getPort(), responder );
 
 	}
 
-	private static Factory<Treasury> createTreasuryFactory() {
+	public void start() {
+		server.start();
+	}
+
+	private Factory<Treasury> createTreasuryFactory() {
 		return new TreasuryFactory( Configuration.getBaseUrl(), Configuration.getTokenStrength() );
 	}
 
-	private static Connection createConnection() {
+	private Connection createConnection() {
 		return createConnection( Configuration.getDatabaseUrl(), Configuration.getDatabaseUsername(), Configuration.getDatabasePassword(), Configuration.getDatabaseConnectionPoolSize() );
 	}
 
-	private static Connection createConnection( String url, String username, String password, int poolSize ) {
+	private Connection createConnection( String url, String username, String password, int poolSize ) {
 		Connection connection = new org.twuni.common.persistence.jdbc.Connection( url, username, password, poolSize );
 		createSchema( connection );
 		return connection;
 	}
 
-	private static void createSchema( Connection connection ) {
+	private void createSchema( Connection connection ) {
 
 		try {
 
@@ -69,14 +79,17 @@ public class Standalone {
 
 	}
 
-	private static ExceptionHandler createResponder( Factory<Treasury> treasuryFactory, Connection connection ) {
+	private ExceptionHandler createResponder( Factory<Treasury> treasuryFactory, Connection connection ) {
 
 		RequestMapping mapping = new RequestMapping();
 
-		mapping.map( Method.POST, "/create", new Creator( treasuryFactory, connection ) );
-		mapping.map( Method.POST, "/merge", new Merger( treasuryFactory, connection ) );
-		mapping.map( Method.POST, "/split", new Splitter( treasuryFactory, connection ) );
-		mapping.map( Method.POST, "/value", new Evaluator( treasuryFactory, connection ) );
+		mapping.map( Method.POST, "/create", new CreateResponder( treasuryFactory, connection ) );
+		mapping.map( Method.POST, "/merge", new MergeResponder( treasuryFactory, connection ) );
+		mapping.map( Method.POST, "/split", new SplitResponder( treasuryFactory, connection ) );
+		mapping.map( Method.POST, "/value", new EvaluateResponder( treasuryFactory, connection ) );
+
+		mapping.map( Method.GET, "/", new AboutResponder() );
+		mapping.map( Method.GET, "/.*", new AssetResponder() );
 
 		return new ExceptionHandler( mapping );
 

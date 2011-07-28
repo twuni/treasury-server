@@ -1,4 +1,4 @@
-package org.twuni.money.treasury.responder.behavior;
+package org.twuni.money.treasury.responder.transaction;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import org.twuni.money.common.Treasury;
 import org.twuni.money.treasury.Message;
 import org.twuni.money.treasury.repository.TokenRepository;
 
-public class Merge implements Transaction {
+public class MergeTransaction implements Transaction {
 
 	private final Factory<Treasury> treasuryFactory;
 	private final String message;
@@ -19,7 +19,7 @@ public class Merge implements Transaction {
 
 	private String result;
 
-	public Merge( String message, Factory<Treasury> treasuryFactory, Adapter<Token, String> adapter ) {
+	public MergeTransaction( String message, Factory<Treasury> treasuryFactory, Adapter<Token, String> adapter ) {
 		this.message = message;
 		this.treasuryFactory = treasuryFactory;
 		this.adapter = adapter;

@@ -1,4 +1,4 @@
-package org.twuni.money.treasury.responder.behavior;
+package org.twuni.money.treasury.responder.transaction;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -13,14 +13,14 @@ import org.twuni.money.common.Treasury;
 import org.twuni.money.treasury.Message;
 import org.twuni.money.treasury.repository.TokenRepository;
 
-public class Split implements Transaction {
+public class SplitTransaction implements Transaction {
 
 	private final Factory<Treasury> treasuryFactory;
 	private final String message;
 	private final Adapter<Collection<Token>, String> adapter;
 	private String result;
 
-	public Split( String message, Factory<Treasury> treasuryFactory, Adapter<Collection<Token>, String> adapter ) {
+	public SplitTransaction( String message, Factory<Treasury> treasuryFactory, Adapter<Collection<Token>, String> adapter ) {
 		this.message = message;
 		this.treasuryFactory = treasuryFactory;
 		this.adapter = adapter;

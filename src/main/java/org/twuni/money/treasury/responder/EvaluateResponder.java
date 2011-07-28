@@ -7,23 +7,23 @@ import org.twuni.common.net.http.response.Response;
 import org.twuni.common.net.http.response.Status;
 import org.twuni.common.persistence.Connection;
 import org.twuni.money.common.Treasury;
-import org.twuni.money.treasury.responder.behavior.Evaluate;
+import org.twuni.money.treasury.responder.transaction.EvaluateTransaction;
 
-public class Evaluator implements Responder {
+public class EvaluateResponder implements Responder {
 
 	private final Factory<Treasury> treasuryFactory;
 	private final Connection connection;
 
-	public Evaluator( Factory<Treasury> treasuryFactory, Connection connection ) {
+	public EvaluateResponder( Factory<Treasury> treasuryFactory, Connection connection ) {
 		this.treasuryFactory = treasuryFactory;
 		this.connection = connection;
 	}
 
 	@Override
 	public Response respondTo( Request request ) {
-		Evaluate evaluate = new Evaluate( request.getContent(), treasuryFactory );
-		connection.run( evaluate );
-		return new Response( Status.OK, "application/json", evaluate.getResult() );
+		EvaluateTransaction transaction = new EvaluateTransaction( new String( request.getContent() ), treasuryFactory );
+		connection.run( transaction );
+		return new Response( Status.OK, transaction.getResult() );
 	}
 
 }
