@@ -1,11 +1,17 @@
 package org.twuni.money.treasury;
 
+import java.io.File;
+import java.net.URL;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.twuni.common.Factory;
+import org.twuni.common.config.Configuration;
+import org.twuni.common.config.PropertiesConfiguration;
 import org.twuni.common.net.http.Method;
 import org.twuni.common.net.http.Server;
 import org.twuni.common.net.http.responder.ExceptionHandler;
+import org.twuni.common.net.http.responder.FileResponder;
 import org.twuni.common.net.http.responder.RequestMapping;
 import org.twuni.common.net.http.responder.Responder;
 import org.twuni.common.persistence.Connection;
@@ -15,7 +21,6 @@ import org.twuni.money.common.Treasury;
 import org.twuni.money.treasury.repository.PrivateKeyRepository;
 import org.twuni.money.treasury.repository.TokenRepository;
 import org.twuni.money.treasury.responder.AboutResponder;
-import org.twuni.money.treasury.responder.AssetResponder;
 import org.twuni.money.treasury.responder.CreateResponder;
 import org.twuni.money.treasury.responder.EvaluateResponder;
 import org.twuni.money.treasury.responder.MergeResponder;
@@ -26,18 +31,21 @@ public class Standalone {
 	private static final Logger log = LoggerFactory.getLogger( Standalone.class );
 
 	private final Server server;
+	private final Configuration config;
 
 	public static void main( String [] args ) {
-		new Standalone().start();
+		new Standalone( PropertiesConfiguration.load( "treasury" ) ).start();
 	}
 
-	public Standalone() {
+	public Standalone( Configuration config ) {
+
+		this.config = config;
 
 		Connection connection = createConnection();
 		Factory<Treasury> treasuryFactory = createTreasuryFactory();
 		Responder responder = createResponder( treasuryFactory, connection );
 
-		this.server = new Server( Configuration.getPort(), responder );
+		this.server = new Server( getPort(), responder );
 
 	}
 
@@ -46,11 +54,11 @@ public class Standalone {
 	}
 
 	private Factory<Treasury> createTreasuryFactory() {
-		return new TreasuryFactory( Configuration.getBaseUrl(), Configuration.getTokenStrength() );
+		return new TreasuryFactory( getBaseUrl(), getTokenStrength() );
 	}
 
 	private Connection createConnection() {
-		return createConnection( Configuration.getDatabaseUrl(), Configuration.getDatabaseUsername(), Configuration.getDatabasePassword(), Configuration.getDatabaseConnectionPoolSize() );
+		return createConnection( getDatabaseUrl(), getDatabaseUsername(), getDatabasePassword(), getDatabaseConnectionPoolSize() );
 	}
 
 	private Connection createConnection( String url, String username, String password, int poolSize ) {
@@ -89,10 +97,63 @@ public class Standalone {
 		mapping.map( Method.POST, "/value", new EvaluateResponder( treasuryFactory, connection ) );
 
 		mapping.map( Method.GET, "/", new AboutResponder() );
-		mapping.map( Method.GET, "/.*", new AssetResponder() );
+		mapping.map( Method.GET, "/.*", createFileResponder( "assets" ) );
 
 		return new ExceptionHandler( mapping );
 
+	}
+
+	private Responder createFileResponder( String parentDirectoryName ) {
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		URL resource = classLoader.getResource( parentDirectoryName );
+		File parentDirectory = new File( resource.getPath() );
+		return new FileResponder( parentDirectory );
+	}
+
+	public String getBaseUrl() {
+
+		StringBuilder url = new StringBuilder();
+
+		url.append( "http" );
+		url.append( "://" );
+		url.append( getDomain() );
+
+		int port = getPort();
+		if( port != 80 ) {
+			url.append( ":" );
+			url.append( port );
+		}
+
+		return url.toString();
+
+	}
+
+	public int getPort() {
+		return config.getInt( "server.port" );
+	}
+
+	public String getDomain() {
+		return config.getString( "server.domain" );
+	}
+
+	public int getTokenStrength() {
+		return config.getInt( "token.strength" );
+	}
+
+	public String getDatabaseUrl() {
+		return config.getString( "jdbc.url" );
+	}
+
+	public String getDatabaseUsername() {
+		return config.getString( "jdbc.username" );
+	}
+
+	public String getDatabasePassword() {
+		return config.getString( "jdbc.password", "" );
+	}
+
+	public int getDatabaseConnectionPoolSize() {
+		return config.getInt( "jdbc.pool_size" );
 	}
 
 }

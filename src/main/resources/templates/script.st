@@ -1,0 +1,1 @@
+$it:{<script src="/scripts/$it$.js"></script>}$

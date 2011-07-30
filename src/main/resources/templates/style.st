@@ -1,0 +1,1 @@
+$it:{<link rel="stylesheet" href="/styles/$it$.css"/>}$
