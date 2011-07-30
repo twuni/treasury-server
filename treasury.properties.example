@@ -1,7 +1,7 @@
 server.port=8080
 server.domain=localhost
 
-token.strength=2048
+token.strength=256
 
 jdbc.url=jdbc:hsqldb:mem:test
 jdbc.username=SA
