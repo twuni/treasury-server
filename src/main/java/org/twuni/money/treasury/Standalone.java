@@ -94,7 +94,7 @@ public class Standalone {
 		mapping.map( Method.POST, "/create", new CreateResponder( treasuryFactory, connection ) );
 		mapping.map( Method.POST, "/merge", new MergeResponder( treasuryFactory, connection ) );
 		mapping.map( Method.POST, "/split", new SplitResponder( treasuryFactory, connection ) );
-		mapping.map( Method.POST, "/value", new EvaluateResponder( treasuryFactory, connection ) );
+		mapping.map( Method.POST, "/value", new EvaluateResponder( connection ) );
 
 		mapping.map( Method.GET, "/", new AboutResponder() );
 		mapping.map( Method.GET, "/.*", createFileResponder( "assets" ) );
