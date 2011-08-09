@@ -144,7 +144,7 @@
 		<dependency>
 			<groupId>org.twuni.money</groupId>
 			<artifactId>common</artifactId>
-			<version>0.2.4</version>
+			<version>0.2.5-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>

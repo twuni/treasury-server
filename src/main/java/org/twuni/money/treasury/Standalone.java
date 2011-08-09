@@ -24,6 +24,7 @@ import org.twuni.money.treasury.responder.AboutResponder;
 import org.twuni.money.treasury.responder.CreateResponder;
 import org.twuni.money.treasury.responder.EvaluateResponder;
 import org.twuni.money.treasury.responder.MergeResponder;
+import org.twuni.money.treasury.responder.RefreshResponder;
 import org.twuni.money.treasury.responder.SplitResponder;
 
 public class Standalone {
@@ -92,6 +93,7 @@ public class Standalone {
 		RequestMapping mapping = new RequestMapping();
 
 		mapping.map( Method.POST, "/create", new CreateResponder( treasuryFactory, connection ) );
+		mapping.map( Method.POST, "/refresh", new RefreshResponder( treasuryFactory, connection ) );
 		mapping.map( Method.POST, "/merge", new MergeResponder( treasuryFactory, connection ) );
 		mapping.map( Method.POST, "/split", new SplitResponder( treasuryFactory, connection ) );
 		mapping.map( Method.POST, "/value", new EvaluateResponder( connection ) );
