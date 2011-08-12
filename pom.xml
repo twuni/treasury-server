@@ -11,7 +11,7 @@
 
 	<groupId>org.twuni.money</groupId>
 	<artifactId>treasury-server</artifactId>
-	<version>0.1.3</version>
+	<version>0.1.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Treasury</name>
